@@ -1,22 +1,40 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-import styles from './App.module.css';
-import BasicEditor from './views/editor/BasicEditor';
+import React from "react";
+import "./App.css";
+import { Editor, EditorTools } from "@progress/kendo-react-editor";
+import content from "./content";
+
+const {
+  Bold,
+  Italic,
+  Underline,
+  AlignLeft,
+  AlignRight,
+  AlignCenter,
+  Indent,
+  Outdent,
+  OrderedList,
+  UnorderedList,
+  Undo,
+  Redo,
+  Link,
+  Unlink,
+} = EditorTools;
+
 function App() {
   return (
-    <Router>
-      <div className={styles.app}>
-        <div>
-          <nav>
-            <Link to="/">Basic</Link>
-          </nav>
-        </div>
-
-        <Switch>
-          <Route href="/" component={BasicEditor} />
-        </Switch>
-      </div>
-    </Router>
+    <div className="app">
+      <Editor
+        tools={[
+          [Bold, Italic, Underline],
+          [Undo, Redo],
+          [Link, Unlink],
+          [AlignLeft, AlignCenter, AlignRight],
+          [OrderedList, UnorderedList, Indent, Outdent],
+        ]}
+        contentStyle={{ height: 320 }}
+        defaultContent={content}
+      />
+    </div>
   );
 }
 
